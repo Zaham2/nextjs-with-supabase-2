@@ -4,17 +4,16 @@ import MapContainer from "@/components/MapContainer";
 import GlobalContext from "@/contexts/GlobalContext";
 import { Places } from "@/helpers/classes";
 import { getAverageLatLong } from "@/helpers/functions";
+import { createClient } from "@/utils/supabase/server";
 import React from "react";
 
 export default async function Index() {
 
-  const allPlaces: Places[] = await fetch(`${process.env.NEXT_PUBLIC_URL}/users`, {  //TODO: Rename this route
-    method: 'GET',
-    cache: 'no-store',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }).then((res) => res.json())
+  const supabase = createClient();
+  const allPlaces = (await supabase
+    .from('Places')
+    .select('*'))
+    .data as Places[];
 
   return (
     <div>
