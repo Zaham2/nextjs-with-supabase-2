@@ -8,7 +8,7 @@ import React from "react";
 
 export default async function Index() {
 
-  const allPlaces: Places[] = await fetch(`${process.env.NEXT_BASE_URL}/users`, {  //TODO: Rename this route
+  const allPlaces: Places[] = await fetch(`${process.env.NEXT_PUBLIC_URL}/users`, {  //TODO: Rename this route
     method: 'GET',
     cache: 'no-store',
     headers: {
